@@ -1,0 +1,58 @@
+syntax = "proto3";
+
+package services;
+
+option go_package = "github.com/srahul3/go-grpc-streams/proto";
+
+// Foo service definition
+service Foo {
+  // Unary RPC
+  rpc SayHello (HelloRequest) returns (HelloResponse);
+  
+  // Server streaming RPC
+  rpc StreamNumbers (NumberRequest) returns (stream NumberResponse);
+}
+
+// Bar service definition
+service Bar {
+  // Unary RPC
+  rpc GetInfo (InfoRequest) returns (InfoResponse);
+  
+  // Client streaming RPC
+  rpc CollectMessages (stream MessageRequest) returns (MessageResponse);
+}
+
+// Foo service messages
+message HelloRequest {
+  string name = 1;
+}
+
+message HelloResponse {
+  string message = 1;
+}
+
+message NumberRequest {
+  int32 count = 1;
+}
+
+message NumberResponse {
+  int32 number = 1;
+}
+
+// Bar service messages
+message InfoRequest {
+  string query = 1;
+}
+
+message InfoResponse {
+  string info = 1;
+}
+
+message MessageRequest {
+  string content = 1;
+}
+
+message MessageResponse {
+  string result = 1;
+  int32 count = 2;
+}
